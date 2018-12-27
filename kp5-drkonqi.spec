@@ -1,14 +1,14 @@
-%define		kdeplasmaver	5.11.2
+%define		kdeplasmaver	5.14.4
 %define		qtver		5.3.2
 %define		kpname		drkonqi
 Summary:	drkonqi
 Name:		kp5-%{kpname}
-Version:	5.11.2
+Version:	5.14.4
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	8edc0670c326b4c78f3f21d0f7945fc0
+# Source0-md5:	633cc3750606ad94f2c8f49a0fd3a656
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel
@@ -72,5 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kpname}.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/drkonqi
+/etc/xdg/drkonqi.categories
+%attr(755,root,root) %{_libexecdir}/drkonqi
 %{_datadir}/drkonqi
+%{_desktopdir}/org.kde.drkonqi.desktop
