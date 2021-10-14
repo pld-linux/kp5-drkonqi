@@ -1,14 +1,14 @@
-%define		kdeplasmaver	5.22.5
+%define		kdeplasmaver	5.23.0
 %define		qtver		5.9.0
 %define		kpname		drkonqi
 Summary:	drkonqi
 Name:		kp5-%{kpname}
-Version:	5.22.5
+Version:	5.23.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	538a1d9c19cb4cca798d57d764b4894a
+# Source0-md5:	b8b58c92f1bbf010cd517c04e599cebb
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel
@@ -76,3 +76,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/drkonqi
 %{_desktopdir}/org.kde.drkonqi.desktop
 %{_datadir}/qlogging-categories5/drkonqi.categories
+%{_prefix}%{systemdunitdir}/drkonqi-coredump-processor@.service
+%{systemduserunitdir}/drkonqi-coredump-cleanup.service
+%{systemduserunitdir}/drkonqi-coredump-cleanup.timer
+%{systemduserunitdir}/drkonqi-coredump-launcher.socket
+%{systemduserunitdir}/drkonqi-coredump-launcher@.service
+%{_libdir}/qt5/plugins/drkonqi/KDECoredumpNotifierTruck.so
+%attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-cleanup
+%attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-launcher
+%attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-processor
