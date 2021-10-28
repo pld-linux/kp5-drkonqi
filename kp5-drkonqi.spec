@@ -4,7 +4,7 @@
 Summary:	drkonqi
 Name:		kp5-%{kpname}
 Version:	5.23.2
-Release:	1
+Release:	2
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -63,7 +63,11 @@ cd build
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_iconsdir}/{breeze-dark,breeze}
+install -d $RPM_BUILD_ROOT%{systemdunitdir}
+
 %ninja_install -C build
+
+mv $RPM_BUILD_ROOT%{_prefix}%{systemdunitdir}/drkonqi-coredump-processor@.service $RPM_BUILD_ROOT%{systemdunitdir}/
 
 %find_lang %{kpname} --all-name --with-kde
 
@@ -76,11 +80,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/drkonqi
 %{_desktopdir}/org.kde.drkonqi.desktop
 %{_datadir}/qlogging-categories5/drkonqi.categories
-%{_prefix}%{systemdunitdir}/drkonqi-coredump-processor@.service
+%{systemdunitdir}/drkonqi-coredump-processor@.service
 %{systemduserunitdir}/drkonqi-coredump-cleanup.service
 %{systemduserunitdir}/drkonqi-coredump-cleanup.timer
 %{systemduserunitdir}/drkonqi-coredump-launcher.socket
 %{systemduserunitdir}/drkonqi-coredump-launcher@.service
+%dir %{_libdir}/qt5/plugins/drkonqi
 %{_libdir}/qt5/plugins/drkonqi/KDECoredumpNotifierTruck.so
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-cleanup
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-launcher
