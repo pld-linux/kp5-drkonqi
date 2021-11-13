@@ -1,14 +1,14 @@
-%define		kdeplasmaver	5.23.2
+%define		kdeplasmaver	5.23.3
 %define		qtver		5.9.0
 %define		kpname		drkonqi
 Summary:	drkonqi
 Name:		kp5-%{kpname}
-Version:	5.23.2
-Release:	2
+Version:	5.23.3
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	475c2fc4f71ebca907070264f0f3e787
+# Source0-md5:	79b3685d60af849bdd6ac551b93bb61d
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel
