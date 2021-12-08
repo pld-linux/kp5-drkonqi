@@ -43,6 +43,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	qt5-qmake
 BuildRequires:	rpmbuild(macros) >= 1.596
+BuildRequires:	systemd
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
