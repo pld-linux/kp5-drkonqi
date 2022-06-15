@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.24.5
+%define		kdeplasmaver	5.25.0
 %define		qtver		5.9.0
 %define		kpname		drkonqi
 Summary:	drkonqi
 Name:		kp5-%{kpname}
-Version:	5.24.5
+Version:	5.25.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	ec09f5df5604ea250afd4938b11cde47
+Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
+# Source0-md5:	2a531ab3e5f83cd3b3dd2d55ac241e6b
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel
@@ -101,3 +101,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-cleanup
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-launcher
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-processor
+%attr(755,root,root) %{_bindir}/drkonqi-coredump-gui
+%{_desktopdir}/org.kde.drkonqi.coredump.gui.desktop
