@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.27.3
+%define		kdeplasmaver	5.27.4
 %define		qtver		5.15.2
 %define		kpname		drkonqi
 Summary:	drkonqi
 Name:		kp5-%{kpname}
-Version:	5.27.3
+Version:	5.27.4
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	16c5d6c75237ea1a7c7041e8c5ac1b4c
+# Source0-md5:	e38cd4c18daaeebb681fa0957fceff19
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel
