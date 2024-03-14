@@ -1,60 +1,55 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.93.0
+%define		kdeplasmaver	5.27.10
 %define		qtver		5.15.2
 %define		kpname		drkonqi
 Summary:	drkonqi
 Name:		kp5-%{kpname}
-Version:	5.93.0
-Release:	0.1
+Version:	5.27.10
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/unstable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	1c2760cf2d267eafae5019c758a886b0
+Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
+# Source0-md5:	657984f8356578253e1911c8d35041f6
 URL:		http://www.kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6DBus-devel
-BuildRequires:	Qt6Gui-devel
-BuildRequires:	Qt6Widgets-devel
-BuildRequires:	Qt6Xml-devel
+BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5DBus-devel
+BuildRequires:	Qt5Gui-devel
+BuildRequires:	Qt5Widgets-devel
+BuildRequires:	Qt5X11Extras-devel
+BuildRequires:	Qt5Xml-devel
 BuildRequires:	cmake >= 3.16.0
 BuildRequires:	gettext-devel
 BuildRequires:	hardlink >= 1.0-3
-BuildRequires:	kf6-attica-devel
-BuildRequires:	kf6-extra-cmake-modules >= 1.4.0
-BuildRequires:	kf6-frameworkintegration-devel
-BuildRequires:	kf6-kauth-devel
-BuildRequires:	kf6-kcmutils-devel
-BuildRequires:	kf6-kcodecs-devel
-BuildRequires:	kf6-kconfig-devel
-BuildRequires:	kf6-kconfigwidgets-devel
-BuildRequires:	kf6-kcoreaddons-devel
-BuildRequires:	kf6-kcrash-devel
-BuildRequires:	kf6-kguiaddons-devel
-BuildRequires:	kf6-ki18n-devel
-BuildRequires:	kf6-kiconthemes-devel
-BuildRequires:	kf6-kservice-devel
-BuildRequires:	kf6-kstatusnotifieritem-devel
-BuildRequires:	kf6-kwidgetsaddons-devel
-BuildRequires:	kf6-kwindowsystem-devel
-BuildRequires:	kf6-syntax-highlighting-devel
+BuildRequires:	kf5-attica-devel
+BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
+BuildRequires:	kf5-frameworkintegration-devel
+BuildRequires:	kf5-kauth-devel
+BuildRequires:	kf5-kcmutils-devel
+BuildRequires:	kf5-kcodecs-devel
+BuildRequires:	kf5-kconfig-devel
+BuildRequires:	kf5-kconfigwidgets-devel
+BuildRequires:	kf5-kcoreaddons-devel
+BuildRequires:	kf5-kcrash-devel
+BuildRequires:	kf5-kguiaddons-devel
+BuildRequires:	kf5-ki18n-devel
+BuildRequires:	kf5-kiconthemes-devel
+BuildRequires:	kf5-kservice-devel
+BuildRequires:	kf5-kwidgetsaddons-devel
+BuildRequires:	kf5-kwindowsystem-devel
+BuildRequires:	kf5-syntax-highlighting-devel
 BuildRequires:	kp5-kdecoration-devel
 BuildRequires:	kuserfeedback-devel >= 1.2.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	ninja
 BuildRequires:	pkgconfig
-BuildRequires:	polkit-qt6-1-devel
-BuildRequires:	qt6-build >= %{qtver}
-BuildRequires:	qt6-qmake
+BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	qt5-qmake
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	systemd
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	python3-psutil
-# TODO
-Requires:	python3-pygdbmi
-Requires:	python3-sentry-sdk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -68,8 +63,7 @@ Plasma crash handler, gives the user feedback if a program crashed.
 	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	-DHTML_INSTALL_DIR=%{_kdedocdir} \
-	-DWITH_PYTHON_VENDORING=OFF
+	-DHTML_INSTALL_DIR=%{_kdedocdir}
 %ninja_build -C build
 
 %if %{with tests}
@@ -95,35 +89,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/drkonqi
 %{_datadir}/drkonqi
 %{_desktopdir}/org.kde.drkonqi.desktop
-%{_datadir}/qlogging-categories6/drkonqi.categories
+%{_datadir}/qlogging-categories5/drkonqi.categories
 %{systemdunitdir}/drkonqi-coredump-processor@.service
 %{systemduserunitdir}/drkonqi-coredump-cleanup.service
 %{systemduserunitdir}/drkonqi-coredump-cleanup.timer
 %{systemduserunitdir}/drkonqi-coredump-launcher.socket
 %{systemduserunitdir}/drkonqi-coredump-launcher@.service
-%dir %{_libdir}/qt6/plugins/drkonqi
-%attr(755,root,root) %{_libdir}/qt6/plugins/drkonqi/KDECoredumpNotifierTruck.so
+%dir %{_libdir}/qt5/plugins/drkonqi
+%{_libdir}/qt5/plugins/drkonqi/KDECoredumpNotifierTruck.so
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-cleanup
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-launcher
 %attr(755,root,root) %{_prefix}/libexec/drkonqi-coredump-processor
 %attr(755,root,root) %{_bindir}/drkonqi-coredump-gui
 %{_desktopdir}/org.kde.drkonqi.coredump.gui.desktop
-%attr(755,root,root) %{_bindir}/drkonqi-sentry-data
-%{_prefix}%{systemdunitdir}/systemd-coredump@.service.wants/drkonqi-coredump-processor@.service
-%{systemduserunitdir}/default.target.wants/drkonqi-coredump-cleanup.service
-%{systemduserunitdir}/default.target.wants/drkonqi-sentry-postman.path
-%{systemduserunitdir}/drkonqi-coredump-pickup.service
-%{systemduserunitdir}/drkonqi-sentry-postman.path
-%{systemduserunitdir}/drkonqi-sentry-postman.service
-%{systemduserunitdir}/drkonqi-sentry-postman.timer
-%{systemduserunitdir}/plasma-core.target.wants/drkonqi-coredump-pickup.service
-%{systemduserunitdir}/plasma-core.target.wants/drkonqi-sentry-postman.path
-%{systemduserunitdir}/plasma-core.target.wants/drkonqi-sentry-postman.timer
-%{systemduserunitdir}/sockets.target.wants/drkonqi-coredump-launcher.socket
-%{systemduserunitdir}/timers.target.wants/drkonqi-coredump-cleanup.timer
-%{systemduserunitdir}/timers.target.wants/drkonqi-sentry-postman.timer
-%attr(755,root,root) %{_prefix}/libexec/drkonqi-sentry-postman
-%attr(755,root,root) %{_prefix}/libexec/kf6/drkonqi-polkit-helper
-%{_datadir}/dbus-1/system-services/org.kde.drkonqi.service
-%{_datadir}/dbus-1/system.d/org.kde.drkonqi.conf
-%{_datadir}/polkit-1/actions/org.kde.drkonqi.policy
