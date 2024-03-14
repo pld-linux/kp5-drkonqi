@@ -7,7 +7,7 @@
 Summary:	drkonqi
 Name:		kp5-%{kpname}
 Version:	5.93.0
-Release:	0.2
+Release:	0.1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/unstable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -52,6 +52,7 @@ BuildRequires:	systemd
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	python3-psutil
+# TODO
 Requires:	python3-pygdbmi
 Requires:	python3-sentry-sdk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
